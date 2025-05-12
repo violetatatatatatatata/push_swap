@@ -1,15 +1,4 @@
-# Push and swap strictly ordered lists
-
-## Pendiente
-
-- [x] Parseo
-- [x] Comprobador de tipo de dato
-- [x] Comprobador de orden
-- [x] Comprobador de repetición
-- [x] Instrucciones
-- [ ] Algoritmo
-- [x] Printlist
-
+# Push and swap
 
 ## Teoría
 - Listas
@@ -24,18 +13,8 @@
 - free
 - exit
 
-## Librerias
-
-- unistd -> read, write
-- stdlib -> exit, malloc, free
-
-## Ideas abandonadas
-Utilizar GET_VNAME para escribir si a o b.
-
-\#define GET_VNAME(Variable) (#Variable)
-## Añadidos a libft
-- ft_lstalast: Devuelve la penultima lista.
-
 ## Fuentes
 
 Cree una [carpeta](./fuentes) con el listado.
+
+Para testear este proyecto, he usado el trabajo de https://github.com/o-reo/push_swap_visualizer compilando con el comando ./visualizer ../push_swap/push_swap
