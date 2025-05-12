@@ -20,7 +20,7 @@ El objetivo principal del proyecto es ordenar una lista de números enteros util
 
 He testeado este proyecto con ayuda del push_swap_visualizer: 
 https://github.com/o-reo/push_swap_visualizer
-Por su estructura, al usar este visualizer he testeado con el comando:
+Desde push_swap_visualizer/build/bin, al usar este visualizer he testeado con el comando:
 ```bash
 ./visualizer ../push_swap/push_swap
 ```
