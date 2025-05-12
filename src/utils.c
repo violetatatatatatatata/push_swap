@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 12:17:52 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/12 20:02:22 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/12 20:39:33 by epascual42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@
  */
 int	is_valid(int *nums, int size)
 {
-    int	i;
-    int	j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (i < size - 1)
-    {
-        i = 0;
-        while (j < size)
-        {
-            j = i + 1;
-            if (nums[i] == nums[j])
-                return (0);
-            j++;
-        }
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (i < size - 1)
+	{
+		i = 0;
+		while (j < size)
+		{
+			j = i + 1;
+			if (nums[i] == nums[j])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 void	free_stacks(t_stacks *s)
