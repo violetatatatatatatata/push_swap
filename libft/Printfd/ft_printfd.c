@@ -6,7 +6,7 @@
 /*   By: epascual <epascual@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 17:23:26 by epascual          #+#    #+#             */
-/*   Updated: 2025/02/27 13:03:13 by epascual         ###   ########.fr       */
+/*   Updated: 2025/05/12 19:50:40 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	checkerfd(int fd, int *ret, char check, va_list opc)
 	if (check == 's')
 		*ret += printstringfd(fd, va_arg(opc, char *));
 	if (check == 'p')
-		*ret += printpointfd(fd, va_arg(opc, unsigned long long), \
+		*ret += printpointfd(fd, va_arg(opc, unsigned long long),
 				"0123456789abcdef");
 	if (check == 'd')
 		*ret += printnumfd(fd, va_arg(opc, int), "0123456789");

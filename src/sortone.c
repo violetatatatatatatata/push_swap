@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 14:23:14 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/11 15:41:50 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/12 20:02:00 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sortdos(t_list *a)
 {
-	if (a->content > a->next->content)
+	if (*(int *)(a->content) > *(int *)(a->next->content))
 		sa(&a);
 }
 
@@ -24,55 +24,46 @@ void	sorttres(t_list *a)
 		sa(&a);
 }
 
-void	sort_small(t_stacks *s)
+void	sort_four_or_five(t_stacks *s)
 {
-	int		min;
-	t_list	**target;
-	t_list	*tmp;
-	int		pos;
-
-	while (ft_lstsize(s->a) > 3)
+	if (ft_lstsize(s->a) == 4)
 	{
-		min = minlst(s->a);
-		target = lstnum(s->a, min);
-		tmp = s->a;
-		pos = 0;
-		while (tmp && tmp != *target)
-		{
-			tmp = tmp->next;
-			pos++;
-		}
-		if (pos <= ft_lstsize(s->a) / 2)
-			while (*target != s->a)
-				ra(&s->a);
-		else
-			while (*target != s->a)
-				rra(&s->a);
+		while (*(int *)(s->a->content) != minlst(s->a))
+			ra(&s->a);
 		pb(&s->a, &s->b);
-	}
-	sorttres(s->a);
-	while (s->b)
+		sorttres(s->a);
 		pa(&s->a, &s->b);
+	}
+	else if (ft_lstsize(s->a) == 5)
+	{
+		while (*(int *)(s->a->content) != minlst(s->a))
+			ra(&s->a);
+		pb(&s->a, &s->b);
+		while (*(int *)(s->a->content) != minlst(s->a))
+			ra(&s->a);
+		pb(&s->a, &s->b);
+		sorttres(s->a);
+		pa(&s->a, &s->b);
+		pa(&s->a, &s->b);
+	}
 }
 
-void    selector(t_stacks *stacks)
+void	selector(t_stacks *stacks)
 {
-    int size;
+	int	size;
 
-    size = ft_lstsize(stacks->a);
-    if (checkorder(stacks->a))
-        return ;
-    if (size == 0 || size == 1)
-        return ;
-    else if (size == 2)
-        sortdos(stacks->a);
-    else if (size == 3)
-        sorttres(stacks->a);
-    else if (size <= 5)
-        sort_small(stacks);
-    else
-    {
-        index_stack(stacks->a);
-        radix_sort(&stacks->a, &stacks->b);
-    }
+	size = ft_lstsize(stacks->a);
+	if (checkorder(stacks->a) || size < 2)
+		return ;
+	if (size == 2)
+		sortdos(stacks->a);
+	if (size == 3)
+		sorttres(stacks->a);
+	else if (size <= 5)
+		sort_four_or_five(stacks);
+	else
+	{
+		index_stack(stacks->a);
+		radix_sort(&stacks->a, &stacks->b);
+	}
 }

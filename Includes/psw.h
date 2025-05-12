@@ -3,61 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   psw.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
+/*   By: avelandr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/11 11:46:22 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/11 15:28:15 by avelandr         ###   ########.fr       */
+/*   Created: 2025/05/12 19:54:43 by avelandr          #+#    #+#             */
+/*   Updated: 2025/05/12 20:02:29 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef PSW_H
+# define PSW_H
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <limits.h>
-# include <string.h>
 # include "libft.h"
 
-typedef struct
+typedef struct s_stacks
 {
 	t_list	*a;
 	t_list	*b;
 }	t_stacks;
 
 // utils.c
-int			is_valid(int *nums, int size);
+int		is_valid(int *nums, int size);
 void		free_stacks(t_stacks *s);
 t_list		**lstnum(t_list *lst, int num);
-int			minlst(t_list *lst);
+int		minlst(t_list *lst);
 void		ft_printlist(t_list *a);
 
 // check.c
-int			checkorder(t_list *ord);
-int			norep(char **argv, int argc);
-int			checknum(int argc, char **argv);
-int			checkargs(int argc, char **argv);
+int		checkorder(t_list *ord);
+int		norep(char **argv, int argc);
+int		checknum(int argc, char **argv);
+int		checkargs(int argc, char **argv);
+void		liberar_array(char **array);
 
 // algorithm.c
 void		radix_sort(t_list **a, t_list **b);
+void		radix_pass(t_list **a, t_list **b, int i, int size);
 void		index_stack(t_list *a);
-int			*list2array(t_list *a, int size);
-int			get_index(int *arr, int size, int val);
+int		*list2array(t_list *a, int size);
 void		sort_array(int *arr, int size);
 
 // sortone.c 
 void		sortdos(t_list *a);
 void		sorttres(t_list *a);
-void		sort_small(t_stacks *s);
+void		sort_four_or_five(t_stacks *s);
 void		selector(t_stacks *stacks);
 
-// leer_args.c
+// utils2.c
 char		**leer_argumentos(char const *str);
-size_t		 contar_args(char const *str);
-int			*list_nums(char const *str);
-void		liberar_array(char **array);
-t_stacks    init_stacks(int *nums, int size);
+int		get_index(int *arr, int size, int val);
+
+// leer_args.c
+size_t		contar_args(char const *str);
+int		*fill_nums(char **aux, int count);
+int		*list_nums(char const *str);
+t_stacks	init_stacks(int *nums, int size);
+t_list		*new_stack_node(int n);
 
 /*	MOVIMIENTOS	*/
 

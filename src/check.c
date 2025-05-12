@@ -6,12 +6,13 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:22:55 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/11 15:23:51 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/12 19:58:33 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/psw.h"
 
+// comprueba si efectivamente la lista está ordenada
 int	checkorder(t_list *ord)
 {
 	int	i;
@@ -21,7 +22,7 @@ int	checkorder(t_list *ord)
 	i = 1;
 	while (ord->next)
 	{
-		if ((*(int *) (ord->content) < ((*(int *)(ord->next->content)))))
+		if ((*(int *)(ord->content) < ((*(int *)(ord->next->content)))))
 			i += 1;
 		else
 		{
@@ -53,6 +54,7 @@ int	norep(char **argv, int argc)
 	return (1);
 }
 
+// Controla el input de numeros negativos y si es válido
 int	checknum(int argc, char **argv)
 {
 	int	i;
@@ -75,7 +77,7 @@ int	checknum(int argc, char **argv)
 	return (1);
 }
 
-//Comprueba los argumentos
+// Comprueba si el número de argumentos es correcto
 int	checkargs(int argc, char **argv)
 {
 	if (argc < 2)
@@ -83,4 +85,19 @@ int	checkargs(int argc, char **argv)
 	if (!argv)
 		return (0);
 	return (1);
+}
+
+void	liberar_array(char **array)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }

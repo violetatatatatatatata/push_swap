@@ -3,75 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epascual42 <marvin@42.fr>                  +#+  +:+       +#+        */
+/*   By: avelandr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 11:02:35 by epascual42        #+#    #+#             */
-/*   Updated: 2025/05/11 13:29:21 by avelandr         ###   ########.fr       */
+/*   Created: 2025/05/12 18:19:15 by avelandr          #+#    #+#             */
+/*   Updated: 2025/05/12 19:58:21 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/psw.h"
 
 /*
-    - index_stack(stacks->a);                   // primero convertimos los valores a índices
-    - radix_sort(&stacks->a, &stacks->b);       // luego aplicamos radix sort 
-*/
+   - index_stack(stacks->a):  primero convertimos los valores a índices
+   - radix_sort(&stacks->a, &stacks->b): luego aplicamos radix sort 
+ */
 void	radix_sort(t_list **a, t_list **b)
 {
-	int		max_bits;
-	int		size;
-	int		i, j;
+	int	max_bits;
+	int	size;
+	int	i;
 
 	size = ft_lstsize(*a);
 	max_bits = 0;
 	while ((size - 1) >> max_bits)
 		max_bits++;
-	for (i = 0; i < max_bits; i++)
+	i = 0;
+	while (i < max_bits)
 	{
-		for (j = 0; j < size; j++)
-		{
-			int num = *((int *)(*a)->content);
-			if (((num >> i) & 1) == 0)
-				pb(a, b);
-			else
-				ra(a);
-		}
+		radix_pass(a, b, i, size);
 		while (*b)
 			pa(a, b);
+		i++;
 	}
 }
 
 /*
-    - Obtener el tamaño del stack con ft_lstsize(a).
-    - Copiar los valores a un array (list_to_array).
-    - Ordenar ese array.
-    - Recorrer la lista a:
-    - Para cada nodo, buscar su valor original en el array ordenado.
-    - Reemplazar el valor del nodo por el índice encontrado (get_index).
-    - Liberar el array.
+Realiza una pasada de radix bit a bit sobre el stack 'a'
+En esta pasada, mira el bit i-ésimo de cada número y lo manda a
+'b' si es 0, o lo rota si es 1
 */
-void    index_stack(t_list *a)
+void	radix_pass(t_list **a, t_list **b, int i, int size)
 {
-    int		*arr;
-    int		size;
-    t_list	*aux;
+	int		j;
+	t_list	*node;
+
+	j = 0;
+	while (j < size)
+	{
+		node = *a;
+		if (((*(int *)node->content >> i) & 1) == 0)
+			pb(a, b);
+		else
+			ra(a);
+		j++;
+	}
+}
+
+/*
+   - Obtener el tamaño del stack con ft_lstsize(a).
+   - Copiar los valores a un array (list_to_array).
+   - Ordenar ese array.
+   - Recorrer la lista a:
+   - Para cada nodo, buscar su valor original en el array ordenado.
+   - Reemplazar el valor del nodo por el índice encontrado (get_index).
+   - Liberar el array.
+ */
+void	index_stack(t_list *a)
+{
+	int		*arr;
+	int		size;
+	t_list	*aux;
 	int		*num;
 	int		indice;
 
-    size = ft_lstsize(a);   // funcion del bonus
-    arr = list2array(a, size);
-    if (!arr)
-        return ;
-    sort_array(arr, size);
-    aux = a;
-    while (aux)
-    {
-        num = (int *) aux->content;
+	size = ft_lstsize(a);
+	arr = list2array(a, size);
+	if (!arr)
+		return ;
+	sort_array(arr, size);
+	aux = a;
+	while (aux)
+	{
+		num = (int *) aux->content;
 		indice = get_index(arr, size, *num);
-        *num = indice;
-        aux = aux->next;
-    }
-    free(arr);
+		*num = indice;
+		aux = aux->next;
+	}
+	free(arr);
 }
 
 // Parsea a integers todos los elementos de la lista
@@ -91,20 +108,6 @@ int	*list2array(t_list *a, int size)
 		a = a->next;
 	}
 	return (arr);
-}
-
-int	get_index(int *arr, int size, int val)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (arr[i] == val)
-			return (i);
-		i++;
-	}
-	return (-1);
 }
 
 // Ordena el array de indices que usa radix

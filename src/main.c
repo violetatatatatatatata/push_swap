@@ -6,17 +6,26 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:15:38 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/11 15:47:06 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/12 19:01:55 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/psw.h"
 
-/*Parece ser que sa = sb, pa = pb, ra = rb, rra = rrb
- * Has de utilizar el stack b como si fuera el temporal?
- * No usar atoi por si letras intercaladas.
- * Necesitas una util que cuente el tamano de los arrays
- * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	- Verifica si hay suficientes argumentos (argc < 2).
+		Si no, termina el programa.
+	- Comprueba que los argumentos sean números válidos (checknum) y que no
+	haya duplicados (norep).
+		Si falla, imprime "Error" y termina.
+	- Calcula el tamaño de la lista (size = argc - 1).
+	- Convierte los argumentos en una lista de números enteros (list_nums).
+		Si falla, imprime "Error" y termina.
+	- Inicializa las pilas (init_stacks) con los números y su tamaño.
+		Si falla, imprime "Error", libera la memoria de los números y termina.
+	- Llama a selector, que probablemente contiene la lógica principal.
+	- Libera la memoria de la lista de números y las pilas antes de salir.
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 int	main(int argc, char *argv[])
 {
@@ -26,32 +35,21 @@ int	main(int argc, char *argv[])
 
 	if (argc < 2)
 		return (0);
-	if (checknum(argc, argv) == 0 || norep(argv, argc) == 0)
-	{
-		ft_printf("Errorini argumentiini\n");
-		return (1);
-	}
-	size = 0;
-	nums = list_nums(*argv);
+	if (!checknum(argc, argv) || !norep(argv, argc))
+		return (ft_printf("Error\n"), 1);
+	size = argc - 1;
+	nums = list_nums(*argv + 1);
 	if (!nums)
-	{
-		ft_printf("Error 536\n");
-		return (1);
-	}
+		return (ft_printf("Error\n"), 1);
 	s = init_stacks(nums, size);
 	if (!s.a)
 	{
-		ft_printf("Error nostack\n");
+		ft_printf("Error\n");
 		free(nums);
 		return (1);
 	}
-	if (checkorder(s.a))
-		ft_printf("Ordenado\n");
-	else
-		ft_printf("No ordenado\n");
-	ft_printf("Imprime a:\n");
-	ft_printlist(s.a);
 	selector(&s);
+	free(nums);
 	free_stacks(&s);
 	return (0);
 }
