@@ -17,4 +17,9 @@
 
 Cree una [carpeta](./fuentes) con el listado.
 
-Para testear este proyecto, he usado el trabajo de https://github.com/o-reo/push_swap_visualizer compilando con el comando ./visualizer ../push_swap/push_swap
+He testeado este proyecto con ayuda del push_swap_visualizer: 
+https://github.com/o-reo/push_swap_visualizer
+Por su estructura, al usar este visualizer he testeado con el comando:
+´´´bash
+./visualizer ../push_swap/push_swap
+´´´
