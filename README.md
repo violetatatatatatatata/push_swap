@@ -13,6 +13,9 @@ El objetivo principal del proyecto es ordenar una lista de números enteros util
 ./push_swap [números a ordenar]
 ```
 
+![stack100](images/100.png)
+![stack500](images/500.png)
+
 ## Fuentes
 
 He testeado este proyecto con ayuda del push_swap_visualizer: 
