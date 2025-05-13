@@ -6,7 +6,7 @@
 /*   By: avelandr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:19:15 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/12 19:58:21 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:35:49 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	radix_sort(t_list **a, t_list **b)
 	int	size;
 	int	i;
 
+	if (checkorder(*a))
+		return ;
 	size = ft_lstsize(*a);
 	max_bits = 0;
 	while ((size - 1) >> max_bits)
@@ -32,6 +34,8 @@ void	radix_sort(t_list **a, t_list **b)
 		radix_pass(a, b, i, size);
 		while (*b)
 			pa(a, b);
+		if (checkorder(*a))
+			break ;
 		i++;
 	}
 }

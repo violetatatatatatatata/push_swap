@@ -6,7 +6,7 @@
 /*   By: avelandr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 19:54:43 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/12 20:02:29 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:18:50 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@ typedef struct s_stacks
 }	t_stacks;
 
 // utils.c
-int		is_valid(int *nums, int size);
+int			is_valid(int *nums, int size);
 void		free_stacks(t_stacks *s);
 t_list		**lstnum(t_list *lst, int num);
-int		minlst(t_list *lst);
+int			minlst(t_list *lst);
 void		ft_printlist(t_list *a);
 
 // check.c
-int		checkorder(t_list *ord);
-int		norep(char **argv, int argc);
-int		checknum(int argc, char **argv);
-int		checkargs(int argc, char **argv);
+int			checkorder(t_list *ord);
+int			norep(char **argv, int argc);
+int			checknum(int argc, char **argv);
+int			checkargs(int argc, char **argv);
 void		liberar_array(char **array);
 
 // algorithm.c
 void		radix_sort(t_list **a, t_list **b);
 void		radix_pass(t_list **a, t_list **b, int i, int size);
 void		index_stack(t_list *a);
-int		*list2array(t_list *a, int size);
+int			*list2array(t_list *a, int size);
 void		sort_array(int *arr, int size);
 
 // sortone.c 
@@ -53,12 +53,13 @@ void		selector(t_stacks *stacks);
 
 // utils2.c
 char		**leer_argumentos(char const *str);
-int		get_index(int *arr, int size, int val);
+int			get_index(int *arr, int size, int val);
+int			get_pos(t_list *lst, int val);
 
 // leer_args.c
 size_t		contar_args(char const *str);
-int		*fill_nums(char **aux, int count);
-int		*list_nums(char const *str);
+int			*fill_nums(char **aux, int count);
+int			*list_nums(char const *str);
 t_stacks	init_stacks(int *nums, int size);
 t_list		*new_stack_node(int n);
 

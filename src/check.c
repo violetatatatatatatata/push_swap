@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:22:55 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/12 19:58:33 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:36:36 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,15 @@
 // comprueba si efectivamente la lista está ordenada
 int	checkorder(t_list *ord)
 {
-	int	i;
-
 	if (!ord)
 		return (1);
-	i = 1;
 	while (ord->next)
 	{
-		if ((*(int *)(ord->content) < ((*(int *)(ord->next->content)))))
-			i += 1;
-		else
-		{
-			i = 0;
-			break ;
-		}
+		if (*(int *)(ord->content) > *(int *)(ord->next->content))
+			return (0);
 		ord = ord->next;
 	}
-	return (i);
+	return (1);
 }
 
 int	norep(char **argv, int argc)

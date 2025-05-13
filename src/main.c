@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:15:38 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/12 19:01:55 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:47:04 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	if (!checknum(argc, argv) || !norep(argv, argc))
-		return (ft_printf("Error\n"), 1);
+		return (ft_printf("Error 1\n"), 1);
 	size = argc - 1;
-	nums = list_nums(*argv + 1);
+	nums = list_nums(argv[1]);
 	if (!nums)
-		return (ft_printf("Error\n"), 1);
+		return (ft_printf("Error 2\n"), 1);
 	s = init_stacks(nums, size);
 	if (!s.a)
 	{
-		ft_printf("Error\n");
+		ft_printf("Error 3\n");
 		free(nums);
 		return (1);
 	}
