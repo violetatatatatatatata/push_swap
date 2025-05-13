@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:22:55 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/13 16:36:36 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:51:51 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	norep(char **argv, int argc)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i <= argc)
+	i = 0;	// empieza del 0 o 1????
+	while (i < argc)
 	{
 		j = i + 1;
 		while (j < argc)
@@ -58,7 +58,7 @@ int	checknum(int argc, char **argv)
 		j = 0;
 		while (j < (int)ft_strlen(argv[i]))
 		{
-			if (j == 0 && (argv[i][j] != '-' || argv[i][j] != '+'))
+			if (j == 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
 				j++;
 			if (argv[i][j] && !ft_isdigit(argv[i][j]))
 				return (0);

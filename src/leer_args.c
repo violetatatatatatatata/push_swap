@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 01:25:34 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/12 20:00:45 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:48:20 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
    Cuenta cuántos argumentos hay, separando por espacios.
  */
+ // esta funcion puede no ser necesaria en bash
 size_t	contar_args(char const *str)
 {
 	size_t	num_args;
@@ -31,7 +32,7 @@ size_t	contar_args(char const *str)
 	return (num_args);
 }
 
-// funcion auxiliar para list_nums
+// funcion auxiliar para list_nums, reserva memoria para el array y los pasa por atoi
 int	*fill_nums(char **aux, int count)
 {
 	int	*nums;
@@ -50,7 +51,8 @@ int	*fill_nums(char **aux, int count)
 }
 
 // Convierte el array de strings en un array de enteros (los pasa a lista)
-int	*list_nums(char const *str)
+
+int	*list_nums(char const *str/*, int *size*/)
 {
 	char	**aux;
 	int		*nums;
@@ -65,6 +67,7 @@ int	*list_nums(char const *str)
 	if (!aux)
 		return (NULL);
 	nums = fill_nums(aux, count);
+	//*size = count;
 	liberar_array(aux);
 	return (nums);
 }
