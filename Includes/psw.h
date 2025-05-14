@@ -6,7 +6,7 @@
 /*   By: avelandr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 19:54:43 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/13 16:18:50 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:25:16 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,16 @@ typedef struct s_stacks
 }	t_stacks;
 
 // utils.c
-int			is_valid(int *nums, int size);
-void		free_stacks(t_stacks *s);
 t_list		**lstnum(t_list *lst, int num);
 int			minlst(t_list *lst);
 void		ft_printlist(t_list *a);
+int			get_index(int *arr, int size, int val);
+int			get_pos(t_list *lst, int val);
 
 // check.c
 int			checkorder(t_list *ord);
 int			norep(char **argv, int argc);
 int			checknum(int argc, char **argv);
-int			checkargs(int argc, char **argv);
-void		liberar_array(char **array);
 
 // algorithm.c
 void		radix_sort(t_list **a, t_list **b);
@@ -51,17 +49,12 @@ void		sorttres(t_list *a);
 void		sort_four_or_five(t_stacks *s);
 void		selector(t_stacks *stacks);
 
-// utils2.c
-char		**leer_argumentos(char const *str);
-int			get_index(int *arr, int size, int val);
-int			get_pos(t_list *lst, int val);
-
 // leer_args.c
-size_t		contar_args(char const *str);
-int			*fill_nums(char **aux, int count);
 int			*list_nums(char const *str);
 t_stacks	init_stacks(int *nums, int size);
 t_list		*new_stack_node(int n);
+void		free_stacks(t_stacks *s);
+void		liberar_array(char **array);
 
 /*	MOVIMIENTOS	*/
 

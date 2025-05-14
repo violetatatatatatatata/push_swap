@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:22:55 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/13 17:51:51 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:28:30 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,29 +67,4 @@ int	checknum(int argc, char **argv)
 		i++;
 	}
 	return (1);
-}
-
-// Comprueba si el número de argumentos es correcto
-int	checkargs(int argc, char **argv)
-{
-	if (argc < 2)
-		return (0);
-	if (!argv)
-		return (0);
-	return (1);
-}
-
-void	liberar_array(char **array)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
 }

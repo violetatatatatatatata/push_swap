@@ -6,70 +6,32 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 01:25:34 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/13 17:48:20 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:32:39 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/psw.h"
 
 /*
-   Cuenta cuántos argumentos hay, separando por espacios.
- */
- // esta funcion puede no ser necesaria en bash
-size_t	contar_args(char const *str)
+ Reserva memoria para el array y parsea argv con atoi
+*/
+int *list_nums(char **argv, int count)
 {
-	size_t	num_args;
-	size_t	aux;
+    int *nums;
+    int i;
 
-	num_args = 1;
-	aux = 0;
-	while (str[aux])
-	{
-		if (str[aux] == ' ')
-			num_args++;
-		aux++;
-	}
-	return (num_args);
-}
-
-// funcion auxiliar para list_nums, reserva memoria para el array y los pasa por atoi
-int	*fill_nums(char **aux, int count)
-{
-	int	*nums;
-	int	i;
-
-	nums = malloc(sizeof(int) * count);
-	if (!nums)
-		return (NULL);
-	i = 0;
-	while (i < count)
-	{
-		nums[i] = ft_atoi(aux[i]);
-		i++;
-	}
-	return (nums);
-}
-
-// Convierte el array de strings en un array de enteros (los pasa a lista)
-
-int	*list_nums(char const *str/*, int *size*/)
-{
-	char	**aux;
-	int		*nums;
-	int		count;
-
-	if (!str)
-		return (NULL);
-	count = contar_args(str);
-	if (count < 1)
-		return (NULL);
-	aux = leer_argumentos(str);
-	if (!aux)
-		return (NULL);
-	nums = fill_nums(aux, count);
-	//*size = count;
-	liberar_array(aux);
-	return (nums);
+    if (!argv || count < 1)
+        return (NULL);
+    nums = malloc(sizeof(int) * count);
+    if (!nums)
+        return (NULL);
+    i = 0;
+    while (i < count)
+    {
+        nums[i] = ft_atoi(argv[i]);
+        i++;
+    }
+    return (nums);
 }
 
 /*
@@ -119,4 +81,44 @@ t_stacks	init_stacks(int *nums, int size)
 		i++;
 	}
 	return (s);
+}
+
+void    liberar_array(char **array)
+{
+    int i;
+
+    if (!array)
+        return ;
+    i = 0;
+    while (array[i])
+    {
+        free(array[i]);
+        i++;
+    }
+    free(array);
+}
+
+void    free_stacks(t_stacks *s)
+{
+    t_list  *tmp;
+    t_list  *next;
+
+    tmp = s->a;
+    while (tmp)
+    {
+        next = tmp->next;
+        free(tmp->content);
+        free(tmp);
+        tmp = next;
+    }
+    tmp = s->b;
+    while (tmp)
+    {
+        next = tmp->next;
+        free(tmp->content);
+        free(tmp);
+        tmp = next;
+    }
+    s->a = NULL;
+    s->b = NULL;
 }
