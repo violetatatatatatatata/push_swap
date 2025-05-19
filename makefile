@@ -6,7 +6,7 @@
 #    By: avelandr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/12 20:20:08 by avelandr          #+#    #+#              #
-#    Updated: 2025/05/16 15:51:34 by avelandr         ###   ########.fr        #
+#    Updated: 2025/05/19 18:19:29 by epascual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Wall -Werror -Wextra -MMD -MP -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -MMD -MP #-g -fsanitize=address
 
 # Directories
 SRC_DIR = src
@@ -32,6 +32,7 @@ CLIB = .a
 
 # Executable name
 NAME = push_swap
+TESTVALUES = 1 3 2
 
 # Rules
 all: $(NAME)
@@ -66,5 +67,8 @@ fclean: clean
 	@rm -f $(NAME)  # Remove the executable
 
 re: fclean all  # Rebuild the project
+
+mem: $(NAME)
+	valgrind --verbose --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME) $(TESTVALUES)
 
 .PHONY: all clean fclean re
