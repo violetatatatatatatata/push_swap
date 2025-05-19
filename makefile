@@ -6,7 +6,7 @@
 #    By: avelandr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/12 20:20:08 by avelandr          #+#    #+#              #
-#    Updated: 2025/05/12 20:20:18 by avelandr         ###   ########.fr        #
+#    Updated: 2025/05/16 15:51:34 by avelandr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Wall -Werror -Wextra -MMD -MP -g
+CFLAGS = -Wall -Werror -Wextra -MMD -MP -g -fsanitize=address
 
 # Directories
 SRC_DIR = src

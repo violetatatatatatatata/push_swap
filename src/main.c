@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:15:38 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/13 17:47:42 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:50:02 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,18 @@ int	main(int argc, char *argv[])
 {
 	t_stacks	s;
 	int			*nums;
-	int			size;
 
 	if (argc < 2)
 		return (0);
 	if (!checknum(argc, argv) || !norep(argv, argc))
-		return (ft_printf("Error 1\n"), 1);
-	size = argc - 1;
-	nums = list_nums(argv[1]);	// quiero pasarle el argv a partir del primer argumento para que a partir de este me cree el stack
+		return (ft_printf("Error\n"), 1);
+	nums = list_nums(argv + 1, argc - 1);
 	if (!nums)
-		return (ft_printf("Error 2\n"), 1);
-	s = init_stacks(nums, size);	// en la evaluacion se pueden pasar los argumentos de la forma ./push_swap '1 2 4 3' y debe leerlos como argumentos validos, sin embargo, este size fue calculado como argc - 1 por lo que seria 1 en este caso
+		return (ft_printf("Error\n"), 1);
+	s = init_stacks(nums, argc - 1);
 	if (!s.a)
 	{
-		ft_printf("Error 3\n");
+		ft_printf("Error\n");
 		free(nums);
 		return (1);
 	}

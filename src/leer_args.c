@@ -6,33 +6,11 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 01:25:34 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/14 18:32:39 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:47:49 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/psw.h"
-
-/*
- Reserva memoria para el array y parsea argv con atoi
-*/
-int *list_nums(char **argv, int count)
-{
-    int *nums;
-    int i;
-
-    if (!argv || count < 1)
-        return (NULL);
-    nums = malloc(sizeof(int) * count);
-    if (!nums)
-        return (NULL);
-    i = 0;
-    while (i < count)
-    {
-        nums[i] = ft_atoi(argv[i]);
-        i++;
-    }
-    return (nums);
-}
 
 /*
    Inicializa una estructura t_stacks. Reserva memoria para dos stacks
@@ -100,25 +78,49 @@ void    liberar_array(char **array)
 
 void    free_stacks(t_stacks *s)
 {
-    t_list  *tmp;
-    t_list  *next;
+		t_list	*t;
+		t_list	*lst;
 
-    tmp = s->a;
-    while (tmp)
-    {
-        next = tmp->next;
-        free(tmp->content);
-        free(tmp);
-        tmp = next;
-    }
-    tmp = s->b;
-    while (tmp)
-    {
-        next = tmp->next;
-        free(tmp->content);
-        free(tmp);
-        tmp = next;
-    }
+	t = s->a;
+	lst = s->a;
+		while (lst)
+		{
+			t = (lst)->next;
+			free(lst->content);
+			free(lst);
+			(lst) = t;
+		}
+	t = s->b;
+	lst = s->b;
+		while (lst)
+		{
+			t = (lst)->next;
+			free(lst->content);
+			free(lst);
+			(lst) = t;
+		}
     s->a = NULL;
     s->b = NULL;
+}
+
+/*
+ Reserva memoria para el array y parsea argv con atoi
+*/
+int *list_nums(char **argv, int count)
+{
+    int *nums;
+    int i;
+
+    if (!argv || count < 1)
+        return (NULL);
+    nums = malloc(sizeof(int) * count);
+    if (!nums)
+        return (NULL);
+    i = 0;
+    while (i < count)
+    {
+        nums[i] = ft_atoi(argv[i]);
+        i++;
+    }
+    return (nums);
 }
