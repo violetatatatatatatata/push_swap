@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 01:25:34 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/19 11:47:49 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:16:57 by epascual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,66 +61,66 @@ t_stacks	init_stacks(int *nums, int size)
 	return (s);
 }
 
-void    liberar_array(char **array)
+void	liberar_array(char **array)
 {
-    int i;
+	int	i;
 
-    if (!array)
-        return ;
-    i = 0;
-    while (array[i])
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }
 
-void    free_stacks(t_stacks *s)
+void	free_stacks(t_stacks *s)
 {
-		t_list	*t;
-		t_list	*lst;
+	t_list	*t;
+	t_list	*lst;
 
 	t = s->a;
 	lst = s->a;
-		while (lst)
-		{
-			t = (lst)->next;
-			free(lst->content);
-			free(lst);
-			(lst) = t;
-		}
+	while (lst)
+	{
+		t = (lst)->next;
+		free(lst->content);
+		free(lst);
+		(lst) = t;
+	}
+	s->a = NULL;
 	t = s->b;
 	lst = s->b;
-		while (lst)
-		{
-			t = (lst)->next;
-			free(lst->content);
-			free(lst);
-			(lst) = t;
-		}
-    s->a = NULL;
-    s->b = NULL;
+	while (lst)
+	{
+		t = (lst)->next;
+		free(lst->content);
+		free(lst);
+		(lst) = t;
+	}
+	s->b = NULL;
 }
 
 /*
  Reserva memoria para el array y parsea argv con atoi
 */
-int *list_nums(char **argv, int count)
+int	*list_nums(char **argv, int count)
 {
-    int *nums;
-    int i;
+	int	*nums;
+	int	i;
 
-    if (!argv || count < 1)
-        return (NULL);
-    nums = malloc(sizeof(int) * count);
-    if (!nums)
-        return (NULL);
-    i = 0;
-    while (i < count)
-    {
-        nums[i] = ft_atoi(argv[i]);
-        i++;
-    }
-    return (nums);
+	if (!argv || count < 1)
+		return (NULL);
+	nums = malloc(sizeof(int) * count);
+	if (!nums)
+		return (NULL);
+	i = 0;
+	while (i < count)
+	{
+		nums[i] = ft_atoi(argv[i]);
+		i++;
+	}
+	return (nums);
 }

@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:15:38 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/16 15:50:02 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:03:31 by epascual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int	main(int argc, char *argv[])
 	}
 	selector(&s);
 	free(nums);
-	free_stacks(&s);
+	//free_stacks(&s);
 	return (0);
 }

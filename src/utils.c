@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 12:17:52 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/12 20:39:33 by epascual42       ###   ########.fr       */
+/*   Updated: 2025/05/21 13:19:48 by epascual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,19 @@ void	ft_printlist(t_list *a)
 	}
 }
 */
-int get_index(int *arr, int size, int val)
-{
-    int i;
 
-    i = 0;
-    while (i < size)
-    {
-        if (arr[i] == val)
-            return (i);
-        i++;
-    }
-    return (-1);
+int	get_index(int *arr, int size, int val)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (arr[i] == val)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
 /*
@@ -59,17 +60,17 @@ int get_index(int *arr, int size, int val)
     para evaluar si es mas eficiente usar ra o rra
 */
 
-int get_pos(t_list *lst, int val)
+int	get_pos(t_list *lst, int val)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (lst)
-    {
-        if (*(int *)(lst->content) == val)
-            return (i);
-        lst = lst->next;
-        i++;
-    }
-    return (-1);
+	i = 0;
+	while (lst)
+	{
+		if (*(int *)(lst->content) == val)
+			return (i);
+		lst = lst->next;
+		i++;
+	}
+	return (-1);
 }

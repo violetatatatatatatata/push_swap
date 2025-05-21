@@ -1,20 +1,20 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: avelandr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/12 20:20:08 by avelandr          #+#    #+#              #
-#    Updated: 2025/05/19 18:19:29 by epascual         ###   ########.fr        #
+#    Updated: 2025/05/21 13:23:00 by epascual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compiler
-CC = gcc
+CC = clang
 
 # Compiler flags
-CFLAGS = -Wall -Werror -Wextra -MMD -MP #-g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -MD -MP #-g -fsanitize=address
 
 # Directories
 SRC_DIR = src
@@ -49,7 +49,7 @@ $(INC_DIR):
 	@mkdir -p $(INC_DIR) # Create Includes directory if it doesn't exist
 	@cp -a $(LIBFT_DIR)/$(INC_DIR)/*.h $(INC_DIR) # Copy the header files to Includes
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c makefile
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile
 	@mkdir -p $(OBJ_DIR)  # Create object directory if it doesn't exist
 	@mkdir -p $(DEPS_DIR)  # Create dependencies directory if it doesn't exist
 	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(DEPS_DIR)/$*.d
@@ -70,5 +70,8 @@ re: fclean all  # Rebuild the project
 
 mem: $(NAME)
 	valgrind --verbose --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME) $(TESTVALUES)
+
+test: $(NAME)
+	./$(NAME) $(TESTVALUES)
 
 .PHONY: all clean fclean re
