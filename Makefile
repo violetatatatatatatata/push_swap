@@ -5,16 +5,19 @@
 #                                                     +:+ +:+         +:+      #
 #    By: avelandr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/05/12 20:20:08 by avelandr          #+#    #+#              #
-#    Updated: 2025/05/21 13:23:00 by epascual         ###   ########.fr        #
+#    Created: 2025/06/01 22:06:43 by avelandr          #+#    #+#              #
+#    Updated: 2025/06/04 21:02:38 by epascual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compiler
 CC = clang
 
-# Compiler flags
-CFLAGS = -Wall -Werror -Wextra -MD -MP #-g -fsanitize=address
+# Compiler flags for regular compilation
+CFLAGS = -Wall -Werror -Wextra -MD -MP -g -fsanitize=address
+
+# Compiler flags for Valgrind (without AddressSanitizer)
+CFLAGS_VALGRIND = -Wall -Werror -Wextra -MD -MP -g
 
 # Directories
 SRC_DIR = src
@@ -32,12 +35,13 @@ CLIB = .a
 
 # Executable name
 NAME = push_swap
-TESTVALUES = 1 3 2
+TESTVALUES = 1 3 2 -12 31 32425 1314 121 8376418419# Puedes cambiar estos valores para tus pruebas
 
 # Rules
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES) $(LIB_DIR)/$(LIBFT_DIR)$(CLIB)
+	# Usa CFLAGS para la compilación final del ejecutable
 	$(CC) $(CFLAGS) -o $@ $^ -L$(LIB_DIR) -I $(INC_DIR) -l:$(LIBFT_DIR)$(CLIB)
 
 $(LIB_DIR)/$(LIBFT_DIR)$(CLIB):
@@ -52,7 +56,8 @@ $(INC_DIR):
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile
 	@mkdir -p $(OBJ_DIR)  # Create object directory if it doesn't exist
 	@mkdir -p $(DEPS_DIR)  # Create dependencies directory if it doesn't exist
-	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(DEPS_DIR)/$*.d
+	# Usa CFLAGS para compilar los archivos .c
+	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(DEPS_DIR)/$*.d -I $(INC_DIR)
 
 # Include dependency files
 -include $(DEP_FILES)
@@ -68,10 +73,19 @@ fclean: clean
 
 re: fclean all  # Rebuild the project
 
-mem: $(NAME)
-	valgrind --verbose --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME) $(TESTVALUES)
+# Nueva regla para Valgrind: recompila con CFLAGS_VALGRIND y luego ejecuta Valgrind
+mem: clean_valgrind $(NAME)_valgrind
+	valgrind --verbose --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME)_valgrind $(TESTVALUES)
+
+# Regla para compilar el ejecutable específico para Valgrind
+$(NAME)_valgrind: $(OBJ_FILES) $(LIB_DIR)/$(LIBFT_DIR)$(CLIB)
+	$(CC) $(CFLAGS_VALGRIND) -o $@ $^ -L$(LIB_DIR) -I $(INC_DIR) -l:$(LIBFT_DIR)$(CLIB)
+
+# Regla para limpiar el ejecutable de Valgrind
+clean_valgrind:
+	@rm -f $(NAME)_valgrind
 
 test: $(NAME)
 	./$(NAME) $(TESTVALUES)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re mem test clean_valgrind

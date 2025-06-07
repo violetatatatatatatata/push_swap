@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 01:25:34 by avelandr          #+#    #+#             */
-/*   Updated: 2025/05/21 13:16:57 by epascual         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:58:29 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,44 @@
    necesita un puntero válido, no un valor directo.
  */
 
-t_list	*new_stack_node(int n)
+t_list	*new_stack_node(int num)
 {
-	t_list	*new_node;
+	t_list	*node;
 	int		*value;
 
-	new_node = malloc(sizeof(t_list));
-	if (!new_node)
+	node = malloc(sizeof(t_list));
+	if (!node)
 		return (NULL);
 	value = malloc(sizeof(int));
 	if (!value)
 	{
-		free(new_node);
+		free(node);
 		return (NULL);
 	}
-	*value = n;
-	new_node->content = value;
-	new_node->next = NULL;
-	return (new_node);
+	*value = num;
+	node->content = value;
+	node->next = NULL;
+	return (node);
 }
 
+/*
+- Crea una variable s de tipo t_stacks.
+- Inicializa sus campos s.a y s.b como NULL.
+- Llama a la función new_stack_node(nums[i]) para crear un nodo de
+  lista con el valor actual.
+- Si la creación del nodo falla (!node), se libera toda la memoria asignada
+  hasta ese momento con free_stacks(&s), se reinician los stacks y se
+  retorna s.
+- Si el nodo se creó correctamente, se añade al final de la lista
+  s.a con ft_lstadd_back(&s.a, node).
+- Cuando termina de recorrer el array, retorna la estructura s, donde:
+	s.a contiene la lista de nodos inicializada con los valores de entrada.
+	s.b sigue siendo NULL.
+
+	new_stack_node(int value):
+	ft_lstadd_back(t_list **lst, t_list *new):
+	free_stacks(t_stacks *s):
+*/
 t_stacks	init_stacks(int *nums, int size)
 {
 	t_stacks	s;
@@ -54,58 +72,29 @@ t_stacks	init_stacks(int *nums, int size)
 	{
 		node = new_stack_node(nums[i]);
 		if (!node)
+		{
+			free_stacks(&s);
+			s.a = NULL;
+			s.b = NULL;
 			return (s);
+		}
 		ft_lstadd_back(&s.a, node);
 		i++;
 	}
 	return (s);
 }
 
-void	liberar_array(char **array)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
 void	free_stacks(t_stacks *s)
 {
-	t_list	*t;
-	t_list	*lst;
-
-	t = s->a;
-	lst = s->a;
-	while (lst)
-	{
-		t = (lst)->next;
-		free(lst->content);
-		free(lst);
-		(lst) = t;
-	}
-	s->a = NULL;
-	t = s->b;
-	lst = s->b;
-	while (lst)
-	{
-		t = (lst)->next;
-		free(lst->content);
-		free(lst);
-		(lst) = t;
-	}
-	s->b = NULL;
+	if (s->a)
+		ft_lstclear(&(s->a), &free);
+	if (s->b)
+		ft_lstclear(&(s->b), &free);
 }
 
 /*
- Reserva memoria para el array y parsea argv con atoi
-*/
+   Reserva memoria para el array y parsea argv con atoi
+ */
 int	*list_nums(char **argv, int count)
 {
 	int	*nums;
