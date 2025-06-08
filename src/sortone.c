@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:07:25 by avelandr          #+#    #+#             */
-/*   Updated: 2025/06/02 21:42:05 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:20:27 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ void	sorttres(t_list **a)
 	}
 }
 
+/*
+	- Busca el elemento más pequeño en la pila a.
+	- Rota la pila a (ra o rra) hasta que el elemento
+	  más pequeño esté en la cima.
+	- Mueve el elemento más pequeño a la pila b (pb).
+	- Ordena los tres elementos restantes en la pila a
+	  utilizando sorttres.
+	- Mueve el elemento de la pila b de vuelta a la pila a (pa).
+*/
 void	sort_four(t_stacks *s)
 {
 	while (*(int *)(s->a->content) != minlst(s->a))
