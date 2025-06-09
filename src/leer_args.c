@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 01:25:34 by avelandr          #+#    #+#             */
-/*   Updated: 2025/06/07 17:58:29 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:09:39 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,10 @@ void	free_stacks(t_stacks *s)
 /*
    Reserva memoria para el array y parsea argv con atoi
  */
+#include <stdio.h>
 int	*list_nums(char **argv, int count)
 {
+	long	aux;
 	int	*nums;
 	int	i;
 
@@ -106,9 +108,15 @@ int	*list_nums(char **argv, int count)
 	if (!nums)
 		return (NULL);
 	i = 0;
-	while (i < count)
+	while (i < count /*&& argv[i]*/)
 	{
-		nums[i] = ft_atoi(argv[i]);
+		ft_putnbr_fd(i, 2);
+		ft_putchar_fd('\n', 2);
+		dprintf(2, "estoy: %s\n", argv[i]);
+		aux = ft_atoi(argv[i]);
+		if (aux >= INT_MAX || aux <= INT_MIN)
+			return (free(nums), NULL);
+		nums[i] = aux;
 		i++;
 	}
 	return (nums);

@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:15:38 by avelandr          #+#    #+#             */
-/*   Updated: 2025/06/09 13:44:59 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:06:56 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,21 @@ void	ft_free_pointstring(char **tab)
     establece un indicador (is_split_allocated) para saber si
     se asignó memoria dinámicamente para str.
 */
+#include <stdio.h>
+#include <string.h>
 void	handle_arguments(int argc, char *argv[], t_parsed_args *data)
 {
+	char	*str;
 	data->is_split_allocated = 0;
 	if (argc == 2)
 	{
-		data->str = ft_split(argv[1], ' ');
+		str = ft_strjoin("./program ", argv[1]);
+		data->str = ft_split(str, ' ');
+		//data->str = ft_split(argv[1], ' ');
+		free(str);
 		data->wcnt = ft_wordcount(argv[1], ' ');
-		data->nums = list_nums(data->str, data->wcnt);
+		data->nums = list_nums(data->str + 1, data->wcnt);
+		//data->nums = list_nums(data->str, data->wcnt);
 		data->is_split_allocated = 1;
 	}
 	else

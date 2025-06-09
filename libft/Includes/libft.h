@@ -6,7 +6,7 @@
 /*   By: epascual <epascual@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 03:54:20 by epascual          #+#    #+#             */
-/*   Updated: 2025/02/12 15:59:10 by epascual         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:11:13 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-int				ft_atoi(const char *n);
+long				ft_atoi(const char *n);
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t nelem, size_t elsize);
 //Compares

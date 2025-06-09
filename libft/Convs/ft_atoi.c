@@ -6,15 +6,15 @@
 /*   By: epascual <epascual@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 02:04:20 by epascual          #+#    #+#             */
-/*   Updated: 2025/06/09 15:20:29 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:13:15 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/libft.h"
 
-int	ft_atoi(const char *n)
+long	ft_atoi(const char *n)
 {
-	int	res;
+	long	res;
 	int	i;
 	int	neg;
 
@@ -32,6 +32,8 @@ int	ft_atoi(const char *n)
 		res = res * 10;
 		res = res + n[i] - '0';
 		i++;
+		if (res * neg > 2147483647 || res * neg < -2147483648)
+			break ;
 	}
 	return (neg * res);
 }
