@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:22:55 by avelandr          #+#    #+#             */
-/*   Updated: 2025/06/07 17:53:41 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:19:12 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,19 @@ int	checkorder(t_list *ord)
 	return (1);
 }
 
-// i empieza del 0, j empieza del 1
+//i empieza del 0, j empieza del 1
 int	norep(char **argv, int argc)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	if (argc == 2 && (ft_strcmp(argv[1], argv[2]) == 0))
+		return (0);
 	while (i < argc)
 	{
+		if (ft_strlen(argv[i]) > 9)
+			return (0);
 		j = i + 1;
 		while (j < argc)
 		{
