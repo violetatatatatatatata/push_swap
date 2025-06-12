@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:15:38 by avelandr          #+#    #+#             */
-/*   Updated: 2025/06/09 20:06:56 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:37:23 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int	main(int argc, char *argv[])
 }
 
 /*
-    Libera la memoria de un array de strings (char **).
-    - Itera sobre el array, liberando la memoria de cada
-      string individual (tab[i]) y finalmente liberando la
-      memoria del propio array (tab).
-*/
+   Libera la memoria de un array de strings (char **).
+   - Itera sobre el array, liberando la memoria de cada
+   string individual (tab[i]) y finalmente liberando la
+   memoria del propio array (tab).
+ */
 void	ft_free_pointstring(char **tab)
 {
 	size_t	i;
@@ -70,28 +70,25 @@ void	ft_free_pointstring(char **tab)
 }
 
 /*
-    Analiza argc y argv para preparar una lista de números
-    enteros (nums) y una representación de cadena de esos
-    números (str), junto con el conteo total de números (wcnt),
-    almacenándolos en la estructura t_parsed_args. También
-    establece un indicador (is_split_allocated) para saber si
-    se asignó memoria dinámicamente para str.
-*/
-#include <stdio.h>
-#include <string.h>
+   Analiza argc y argv para preparar una lista de números
+   enteros (nums) y una representación de cadena de esos
+   números (str), junto con el conteo total de números (wcnt),
+   almacenándolos en la estructura t_parsed_args. También
+   establece un indicador (is_split_allocated) para saber si
+   se asignó memoria dinámicamente para str.
+ */
 void	handle_arguments(int argc, char *argv[], t_parsed_args *data)
 {
 	char	*str;
+
 	data->is_split_allocated = 0;
 	if (argc == 2)
 	{
 		str = ft_strjoin("./program ", argv[1]);
 		data->str = ft_split(str, ' ');
-		//data->str = ft_split(argv[1], ' ');
 		free(str);
 		data->wcnt = ft_wordcount(argv[1], ' ');
 		data->nums = list_nums(data->str + 1, data->wcnt);
-		//data->nums = list_nums(data->str, data->wcnt);
 		data->is_split_allocated = 1;
 	}
 	else

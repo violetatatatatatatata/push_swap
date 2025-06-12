@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:22:55 by avelandr          #+#    #+#             */
-/*   Updated: 2025/06/09 20:12:36 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:22:28 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,14 @@ int	checknum(int argc, char **argv)
 	int	j;
 
 	i = 1;
-	while (i < argc)
+	while (i <= argc)
 	{
 		j = 0;
 		while (j < (int)ft_strlen(argv[i]))
 		{
 			if (j == 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
 				j++;
-			if (/*argv[i][j] && */!ft_isdigit(argv[i][j]))
+			if (!ft_isdigit(argv[i][j]))
 				return (0);
 			j++;
 		}

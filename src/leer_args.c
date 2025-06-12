@@ -6,7 +6,7 @@
 /*   By: avelandr <avelandr@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 01:25:34 by avelandr          #+#    #+#             */
-/*   Updated: 2025/06/09 20:09:39 by avelandr         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:01:40 by avelandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,23 @@ t_list	*new_stack_node(int num)
 }
 
 /*
-- Crea una variable s de tipo t_stacks.
-- Inicializa sus campos s.a y s.b como NULL.
-- Llama a la función new_stack_node(nums[i]) para crear un nodo de
-  lista con el valor actual.
-- Si la creación del nodo falla (!node), se libera toda la memoria asignada
-  hasta ese momento con free_stacks(&s), se reinician los stacks y se
-  retorna s.
-- Si el nodo se creó correctamente, se añade al final de la lista
-  s.a con ft_lstadd_back(&s.a, node).
-- Cuando termina de recorrer el array, retorna la estructura s, donde:
-	s.a contiene la lista de nodos inicializada con los valores de entrada.
-	s.b sigue siendo NULL.
+   - Crea una variable s de tipo t_stacks.
+   - Inicializa sus campos s.a y s.b como NULL.
+   - Llama a la función new_stack_node(nums[i]) para crear un nodo de
+   lista con el valor actual.
+   - Si la creación del nodo falla (!node), se libera toda la memoria asignada
+   hasta ese momento con free_stacks(&s), se reinician los stacks y se
+   retorna s.
+   - Si el nodo se creó correctamente, se añade al final de la lista
+   s.a con ft_lstadd_back(&s.a, node).
+   - Cuando termina de recorrer el array, retorna la estructura s, donde:
+   s.a contiene la lista de nodos inicializada con los valores de entrada.
+   s.b sigue siendo NULL.
 
-	new_stack_node(int value):
-	ft_lstadd_back(t_list **lst, t_list *new):
-	free_stacks(t_stacks *s):
-*/
+   new_stack_node(int value):
+   ft_lstadd_back(t_list **lst, t_list *new):
+   free_stacks(t_stacks *s):
+ */
 t_stacks	init_stacks(int *nums, int size)
 {
 	t_stacks	s;
@@ -95,12 +95,11 @@ void	free_stacks(t_stacks *s)
 /*
    Reserva memoria para el array y parsea argv con atoi
  */
-#include <stdio.h>
 int	*list_nums(char **argv, int count)
 {
 	long	aux;
-	int	*nums;
-	int	i;
+	int		*nums;
+	int		i;
 
 	if (!argv || count < 1)
 		return (NULL);
@@ -108,11 +107,8 @@ int	*list_nums(char **argv, int count)
 	if (!nums)
 		return (NULL);
 	i = 0;
-	while (i < count /*&& argv[i]*/)
+	while (i < count)
 	{
-		ft_putnbr_fd(i, 2);
-		ft_putchar_fd('\n', 2);
-		dprintf(2, "estoy: %s\n", argv[i]);
 		aux = ft_atoi(argv[i]);
 		if (aux >= INT_MAX || aux <= INT_MIN)
 			return (free(nums), NULL);
